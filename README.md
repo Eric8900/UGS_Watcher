@@ -3,7 +3,7 @@
 <img width="1519" height="871" alt="image" src="https://github.com/user-attachments/assets/e9b316fa-83eb-41d0-a479-bc7896962ed3" />
 
 # Features
-- Updates every 30 seconds
+- Updates every 30 seconds (detects changes to the **quizzes** tab of Canvas for UGS)
 - Sends a filler message if nothing changes
 - Will @everyone once it detects a change in the attendance quizzes
 
