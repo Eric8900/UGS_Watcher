@@ -1,0 +1,28 @@
+{
+  "name": "ugs_watcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eric8900/UGS_Watcher.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eric8900/UGS_Watcher/issues"
+  },
+  "homepage": "https://github.com/Eric8900/UGS_Watcher#readme",
+  "dependencies": {
+    "discord.js": "^14.23.2",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "wrangler": "^4.43.0"
+  }
+}

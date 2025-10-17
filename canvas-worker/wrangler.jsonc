@@ -1,0 +1,92 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "canvas-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-10-11",
+
+  // ---- Durable Object migrations ----
+  "migrations": [
+    // If you've already deployed with MyDurableObject, use a rename migration:
+    {
+      "tag": "v1",
+      "new_classes": ["MyDurableObject"]
+    },
+    {
+      "tag": "v2",
+      "renamed_classes": [{ "from": "MyDurableObject", "to": "Poller" }]
+    }
+  ],
+
+  // ---- Durable Object binding ----
+  "durable_objects": {
+    "bindings": [
+      {
+        "class_name": "Poller",   // <- must match the exported class in src/index.ts
+        "name": "POLLER"          // <- must match Env.POLLER and your code
+      }
+    ]
+  },
+
+  // ---- Observability (logs/traces in dashboard) ----
+  "observability": {
+    "enabled": true
+  },
+
+  // ---- KV namespaces ----
+  "kv_namespaces": [
+    {
+      "binding": "STATE",
+      "id": "225bbe5d9c8e43cebbfe2d9ac6d879ce"
+    },
+  ],
+  "vars": {
+	"BASE_URL": "https://utexas.instructure.com",
+	"COURSE_ID": "1431941",
+	"PER_PAGE": 100,
+	"INTERVAL_SEC": 30,
+  }
+
+  /**
+   * Smart Placement:
+   * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
+   */
+  // "placement": { "mode": "smart" },
+
+  /**
+   * Environment Variables (non-secret). Add only non-sensitive values here.
+   * For secrets, use: wrangler secret put <NAME>
+   *
+   * Example for your bot:
+   * "vars": {
+   *   "BASE_URL": "https://utexas.instructure.com",
+   *   "COURSE_ID": "1431941",
+   *   "PER_PAGE": 100,
+   *   "INTERVAL_SEC": 30
+   * }
+   */
+  // "vars": { },
+
+  /**
+   * Secrets (example):
+   * wrangler secret put DISCORD_BOT_TOKEN
+   * wrangler secret put DISCORD_CHANNEL_ID
+   * wrangler secret put CANVAS_TOKEN
+   * # or: wrangler secret put COOKIES_JSON
+   */
+
+  /**
+   * Static Assets (optional):
+   * https://developers.cloudflare.com/workers/static-assets/binding/
+   */
+  // "assets": { "directory": "./public/", "binding": "ASSETS" },
+
+  /**
+   * Service Bindings (optional):
+   * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
+   */
+  // "services": [{ "binding": "MY_SERVICE", "service": "my-service" }]
+}
